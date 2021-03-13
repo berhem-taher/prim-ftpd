@@ -7,10 +7,10 @@ import android.view.MenuItem;
 public class FtpPrefsActivity extends PreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Theme theme = LoadPrefsUtil.theme(LoadPrefsUtil.getPrefs(getBaseContext()));
+        setTheme(theme.resourceId());
+        
         super.onCreate(savedInstanceState);
-
-        // note: setting theme here does not work for PreferenceActivity
-        // -> sub classes necessary
 
         // prefs fragment
         getFragmentManager().beginTransaction().replace(

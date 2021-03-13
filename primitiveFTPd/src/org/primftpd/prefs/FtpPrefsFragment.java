@@ -97,6 +97,16 @@ public class FtpPrefsFragment extends PreferenceFragment
 				return false;
 			}
 		});
+		
+		// Update theme when the theme option is changed
+		Preference themePref = findPreference(LoadPrefsUtil.PREF_KEY_THEME);
+		themePref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object newValue) {
+				getActivity().recreate();
+				return true;
+			}
+		});
 	}
 
 	@Override

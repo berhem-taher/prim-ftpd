@@ -83,7 +83,7 @@
     <string name="prefSummaryIdleTimeout">Server will terminate idle connections after this time (FTP only)</string>
     <string name="prefSummaryIdleTimeoutV2">Server will terminate idle connections after this time. Set to 0 to disable.</string>
     <string name="prefTheme">Theme</string>
-    <string name="prefSummaryTheme">Changing Theme may require to restart the app.</string>
+    <string name="prefSummaryTheme">Change the appearance of the app.</string>
     <string name="prefTitleLogging">Log</string>
     <string name="prefSummaryLogging">Log serves analyzing of errors. If the app does not work properly on your device you can send a log to developers. May require to restart the app.</string>
     <string name="prefSummaryLoggingV2">Log serves analyzing of errors. If the app does not work properly on your device you can send a log to developers. May require to restart the app. Text Logs are stored in %s.</string>

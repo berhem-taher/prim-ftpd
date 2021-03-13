@@ -37,8 +37,7 @@ import org.greenrobot.eventbus.ThreadMode;
 import org.primftpd.events.ClientActionEvent;
 import org.primftpd.log.PrimFtpdLoggerBinder;
 import org.primftpd.prefs.AboutActivity;
-import org.primftpd.prefs.FtpPrefsActivityThemeDark;
-import org.primftpd.prefs.FtpPrefsActivityThemeLight;
+import org.primftpd.prefs.FtpPrefsActivity;
 import org.primftpd.prefs.LoadPrefsUtil;
 import org.primftpd.prefs.Logging;
 import org.primftpd.prefs.PrefsBean;
@@ -88,6 +87,8 @@ public class PrimitiveFtpdActivity extends FragmentActivity {
 		@Override public void onSharedPreferenceChanged(
 			SharedPreferences sharedPreferences, String key)
 		{
+			if (key != LoadPrefsUtil.PREF_KEY_THEME)
+				return;
 			logger.debug("onSharedPreferenceChanged(), key: {}", key);
 			prefsChanged = true;
 		}
@@ -255,6 +256,9 @@ public class PrimitiveFtpdActivity extends FragmentActivity {
 
 		// check if chosen SAF directory can be accessed
 		checkSafAccess();
+
+		// Update Theme
+		updateTheme();
 	}
 
 	@Override
@@ -796,10 +800,7 @@ public class PrimitiveFtpdActivity extends FragmentActivity {
 
 	protected void handlePrefs() {
 		logger.trace("handlePrefs()");
-		Class<?> prefsActivityClass = theme == Theme.DARK
-			? FtpPrefsActivityThemeDark.class
-			: FtpPrefsActivityThemeLight.class;
-		Intent intent = new Intent(this, prefsActivityClass);
+		Intent intent = new Intent(this, FtpPrefsActivity.class);
 		startActivity(intent);
 	}
 
@@ -870,6 +871,12 @@ public class PrimitiveFtpdActivity extends FragmentActivity {
 			// re-create own log, don't care about other classes
 			PrimFtpdLoggerBinder.setLoggingPref(logging);
 			this.logger = LoggerFactory.getLogger(getClass());
+		}
+	}
+
+	void updateTheme() {
+		if (theme != LoadPrefsUtil.theme(LoadPrefsUtil.getPrefs(getBaseContext()))) {
+			this.recreate();
 		}
 	}
 }
