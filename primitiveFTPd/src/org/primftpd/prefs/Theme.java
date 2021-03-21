@@ -1,46 +1,30 @@
 package org.primftpd.prefs;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import android.content.Context;
+import android.content.res.Configuration;
+import androidx.appcompat.app.AppCompatDelegate;
 
-import org.primftpd.R;
-
-public enum Theme
+public class Theme
 {
-	DARK("0", "PrimFtpdDarkTheme", R.style.PrimFtpdDarkTheme),
-	LIGHT("1", "PrimFtpdLightTheme", R.style.PrimFtpdLightTheme);
+    public static Boolean isDark(Context context){
+        int uiMode = context.getResources().getConfiguration().uiMode;
+        int currentNightMode = uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        return currentNightMode == Configuration.UI_MODE_NIGHT_YES;
+    }
 
-	private final String xmlValue;
-	private final String themeName;
-	private final int resourceId;
-
-	private Theme(String xmlValue, String themeName, int resourceId) {
-		this.xmlValue = xmlValue;
-		this.themeName = themeName;
-		this.resourceId = resourceId;
-	}
-
-	public String xmlValue() {
-		return xmlValue;
-	}
-	public String themeName() {
-		return themeName;
-	}
-	public int resourceId() {
-		return resourceId;
-	}
-
-	private static final Map<String, Theme> XML_TO_ENUM;
-	static {
-		Map<String, Theme> tmp = new HashMap<String, Theme>();
-		for (Theme theme : values()) {
-			tmp.put(theme.xmlValue, theme);
+    public static int byString(String themeStr) {
+		switch (themeStr) {
+			case "system":
+				if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P){
+					return AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM;
+				}else{
+					return AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY;
+				}
+			case "dark":
+				return AppCompatDelegate.MODE_NIGHT_YES;
+			case "light":	
+				return AppCompatDelegate.MODE_NIGHT_NO;
 		}
-		XML_TO_ENUM = Collections.unmodifiableMap(tmp);
-	}
-
-	public static Theme byXmlVal(String xmlVal) {
-		return XML_TO_ENUM.get(xmlVal);
+		return AppCompatDelegate.MODE_NIGHT_YES;
 	}
 }

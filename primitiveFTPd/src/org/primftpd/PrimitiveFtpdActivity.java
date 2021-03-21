@@ -63,11 +63,13 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 import androidx.fragment.app.FragmentActivity;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 /**
  * Activity to display network info and to start FTP service.
  */
-public class PrimitiveFtpdActivity extends FragmentActivity {
+public class PrimitiveFtpdActivity extends AppCompatActivity {
 
 	private BroadcastReceiver networkStateReceiver = new BroadcastReceiver() {
 		@Override
@@ -81,18 +83,7 @@ public class PrimitiveFtpdActivity extends FragmentActivity {
 
 	// flag must be static to be avail after activity change
 	private static boolean prefsChanged = false;
-	private OnSharedPreferenceChangeListener prefsChangeListener =
-		new OnSharedPreferenceChangeListener()
-	{
-		@Override public void onSharedPreferenceChanged(
-			SharedPreferences sharedPreferences, String key)
-		{
-			if (key != LoadPrefsUtil.PREF_KEY_THEME)
-				return;
-			logger.debug("onSharedPreferenceChanged(), key: {}", key);
-			prefsChanged = true;
-		}
-	};
+	private static OnSharedPreferenceChangeListener prefsChangeListener;
 
 	private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 0xBEEF;
 	private static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE_LOGGING = 0xCAFE;
@@ -105,7 +96,6 @@ public class PrimitiveFtpdActivity extends FragmentActivity {
 	private PrefsBean prefsBean;
 	private IpAddressProvider ipAddressProvider = new IpAddressProvider();
 	private KeyFingerprintProvider keyFingerprintProvider = new KeyFingerprintProvider();
-	private Theme theme;
 	private ServersRunningBean serversRunning;
 	private long timestampOfLastEvent = 0;
 
@@ -132,9 +122,7 @@ public class PrimitiveFtpdActivity extends FragmentActivity {
 		SharedPreferences prefs = LoadPrefsUtil.getPrefs(getBaseContext());
 		prefs.registerOnSharedPreferenceChangeListener(prefsChangeListener);
 
-		// layout & theme
-		theme = LoadPrefsUtil.theme(prefs);
-		setTheme(theme.resourceId());
+		// layout
 		setContentView(getLayoutId());
 
 		// calc keys fingerprints
@@ -186,6 +174,16 @@ public class PrimitiveFtpdActivity extends FragmentActivity {
 		clientActionView1 = findViewById(R.id.clientActionsLine1);
 		clientActionView2 = findViewById(R.id.clientActionsLine2);
 		clientActionView3 = findViewById(R.id.clientActionsLine3);
+
+		prefsChangeListener = new OnSharedPreferenceChangeListener() {
+			@Override
+			public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+				if (key != LoadPrefsUtil.PREF_KEY_THEME)
+					return;
+				logger.debug("onSharedPreferenceChanged(), key: {}", key);
+				prefsChanged = true;
+			}
+		};
 	}
 
 	@Override
@@ -246,6 +244,8 @@ public class PrimitiveFtpdActivity extends FragmentActivity {
 
 		logger.debug("onResume()");
 
+		loadPrefs();
+
 		// register listener to reprint interfaces table when network connections change
 		// android sends those events when registered in code but not when registered in manifest
 		IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
@@ -256,9 +256,6 @@ public class PrimitiveFtpdActivity extends FragmentActivity {
 
 		// check if chosen SAF directory can be accessed
 		checkSafAccess();
-
-		// Update Theme
-		updateTheme();
 	}
 
 	@Override
@@ -407,7 +404,7 @@ public class PrimitiveFtpdActivity extends FragmentActivity {
 				// remove warning if it was present
 				safRadio.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
 			} else {
-				int icon = theme == Theme.DARK
+				int icon = Theme.isDark(getBaseContext())
 						? R.drawable.ic_warning_white_36dp
 						: R.drawable.ic_warning_black_36dp;
 				safRadio.setCompoundDrawablesWithIntrinsicBounds(0, 0, icon, 0);
@@ -871,12 +868,6 @@ public class PrimitiveFtpdActivity extends FragmentActivity {
 			// re-create own log, don't care about other classes
 			PrimFtpdLoggerBinder.setLoggingPref(logging);
 			this.logger = LoggerFactory.getLogger(getClass());
-		}
-	}
-
-	void updateTheme() {
-		if (theme != LoadPrefsUtil.theme(LoadPrefsUtil.getPrefs(getBaseContext()))) {
-			this.recreate();
 		}
 	}
 }

@@ -10,7 +10,6 @@ import android.widget.ListView;
 
 import org.primftpd.R;
 import org.primftpd.prefs.LoadPrefsUtil;
-import org.primftpd.prefs.Theme;
 
 public class TaskerEditConditionActivity extends ListActivity {
 
@@ -19,9 +18,6 @@ public class TaskerEditConditionActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SharedPreferences prefs = LoadPrefsUtil.getPrefs(getBaseContext());
-        Theme theme = LoadPrefsUtil.theme(prefs);
-        setTheme(theme.resourceId());
         setContentView(R.layout.tasker_edit_activity);
 
         TaskerCondition[] conditions = TaskerCondition.values();

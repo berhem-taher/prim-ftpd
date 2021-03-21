@@ -11,7 +11,6 @@ import android.widget.ListView;
 import org.primftpd.R;
 import org.primftpd.filepicker.nononsenseapps.Utils;
 import org.primftpd.prefs.LoadPrefsUtil;
-import org.primftpd.prefs.Theme;
 import org.primftpd.ui.DownloadOrSaveDialogFragment;
 import org.primftpd.util.Defaults;
 
@@ -38,11 +37,6 @@ public class ReceiveSaveAsActivity extends AbstractReceiveShareActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         logger.debug("onCreate()");
-
-        // set theme
-        SharedPreferences prefs = LoadPrefsUtil.getPrefs(getBaseContext());
-        Theme theme = LoadPrefsUtil.theme(prefs);
-        setTheme(theme.resourceId());
 
         // set layout
         setContentView(R.layout.receive_share);

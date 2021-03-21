@@ -157,13 +157,15 @@
     </string-array>
 
     <string-array name="prefThemeNames">
+        <item>Follow System</item>
         <item>Dark</item>
         <item>Light</item>
     </string-array>
 
     <string-array name="prefThemeValues">
-        <item>0</item>
-        <item>1</item>
+        <item>system</item>
+        <item>dark</item>
+        <item>light</item>
     </string-array>
 
     <string-array name="prefLoggingNames">

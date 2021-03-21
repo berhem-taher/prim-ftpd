@@ -10,7 +10,6 @@ import android.widget.ListView;
 
 import org.primftpd.R;
 import org.primftpd.prefs.LoadPrefsUtil;
-import org.primftpd.prefs.Theme;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,9 +23,6 @@ public class TaskerEditActionActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         logger.debug("onCreate()");
         super.onCreate(savedInstanceState);
-        SharedPreferences prefs = LoadPrefsUtil.getPrefs(getBaseContext());
-        Theme theme = LoadPrefsUtil.theme(prefs);
-        setTheme(theme.resourceId());
         setContentView(R.layout.tasker_edit_activity);
 
         TaskerAction[] actions = TaskerAction.values();

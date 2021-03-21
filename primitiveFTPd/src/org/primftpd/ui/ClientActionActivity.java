@@ -17,7 +17,6 @@ import org.primftpd.R;
 import org.primftpd.events.ClientActionEvent;
 import org.primftpd.events.DataTransferredEvent;
 import org.primftpd.prefs.LoadPrefsUtil;
-import org.primftpd.prefs.Theme;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,7 +28,10 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ClientActionActivity extends Activity {
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+
+public class ClientActionActivity extends AppCompatActivity {
 
     public static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -132,12 +134,9 @@ public class ClientActionActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        SharedPreferences prefs = LoadPrefsUtil.getPrefs(getBaseContext());
-        Theme theme = LoadPrefsUtil.theme(prefs);
-        setTheme(theme.resourceId());
         setContentView(R.layout.client_action);
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         EventBus.getDefault().register(this);
 

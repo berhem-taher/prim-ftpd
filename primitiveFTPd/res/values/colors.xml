@@ -13,7 +13,5 @@
     <color name="widgetTextColorEnabled">#000000</color>
 
     <!-- 12% black in LIGHT THEME -->
-    <color name="filepickerLightSeparatorColor">#1e000000</color>
-    <!-- 12% white in BLACK THEME -->
-    <color name="filepickerDarkSeparatorColor">#1effffff</color>
+    <color name="filepickerSeparatorColor">#1e000000</color>
 </resources>

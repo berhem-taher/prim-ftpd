@@ -13,7 +13,9 @@ import org.primftpd.R;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class AboutActivity extends Activity
+import androidx.appcompat.app.AppCompatActivity;
+
+public class AboutActivity extends AppCompatActivity
 {
 	public static final String URL_APL =
 		"https://www.apache.org/licenses/LICENSE-2.0";
@@ -39,18 +41,12 @@ public class AboutActivity extends Activity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-
-		// set theme
-        SharedPreferences prefs = LoadPrefsUtil.getPrefs(getBaseContext());
-        Theme theme = LoadPrefsUtil.theme(prefs);
-        setTheme(theme.resourceId());
-
 		// set layout
 		setContentView(R.layout.about);
 
 		// show action bar to allow user to navigate back
 		// -> the same as for PreferencesActivity
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		// show version num
         TextView versionLabel = (TextView)findViewById(R.id.versionLabel);

@@ -1,0 +1,13 @@
+<resources>
+    <style name="PrimFtpdTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/blueIcon</item>
+		<item name="colorPrimaryDark">@color/blueIconDark</item>
+		<item name="colorAccent">@color/blueIconAccent</item>
+
+		<item name="iconStart">@drawable/ic_play_white_36dp</item>
+		<item name="iconStop">@drawable/ic_stop_white_36dp</item>
+		<item name="iconSettings">@drawable/ic_settings_white_36dp</item>
+        <item name="iconRefresh">@drawable/ic_refresh_white_18dp</item>
+        <!--Note: Switch to Vector drawables-->
+    </style>
+</resources>

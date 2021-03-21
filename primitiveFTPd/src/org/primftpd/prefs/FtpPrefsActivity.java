@@ -4,12 +4,12 @@ import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.view.MenuItem;
 
-public class FtpPrefsActivity extends PreferenceActivity {
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+
+public class FtpPrefsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Theme theme = LoadPrefsUtil.theme(LoadPrefsUtil.getPrefs(getBaseContext()));
-        setTheme(theme.resourceId());
-        
         super.onCreate(savedInstanceState);
 
         // prefs fragment
@@ -20,7 +20,7 @@ public class FtpPrefsActivity extends PreferenceActivity {
 
         // allow to navigate back with action bar
         // DO NOT, force user to use HW back button
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

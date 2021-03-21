@@ -1,29 +1,15 @@
 <resources>
-	<style name="PrimFtpdDarkTheme" parent="android:Theme.Holo">
-		<item name="android:actionBarStyle">@style/PrimFtpdActionBar</item>
-		<item name="iconStart">@drawable/ic_play_white_36dp</item>
-		<item name="iconStop">@drawable/ic_stop_white_36dp</item>
-		<item name="iconSettings">@drawable/ic_settings_white_36dp</item>
-		<item name="iconRefresh">@drawable/ic_refresh_white_18dp</item>
-	</style>
+	<style name="PrimFtpdTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+		<item name="colorPrimary">@color/blueIcon</item>
+		<item name="colorPrimaryDark">@color/blueIconDark</item>
+		<item name="colorAccent">@color/blueIconAccent</item>
 
-	<style name="PrimFtpdLightTheme" parent="android:Theme.Holo.Light">
-		<item name="android:actionBarStyle">@style/PrimFtpdActionBar</item>
 		<item name="iconStart">@drawable/ic_play_white_36dp</item>
 		<item name="iconStop">@drawable/ic_stop_white_36dp</item>
 		<item name="iconSettings">@drawable/ic_settings_white_36dp</item>
 		<item name="iconRefresh">@drawable/ic_refresh_black_18dp</item>
 	</style>
-
-	<style name="PrimFtpdActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
-		<item name="android:background">@color/blueIconDark</item>
-		<item name="android:titleTextStyle">@style/PrimFtpdActionBar.Text</item>
-	</style>
-
-	<style name="PrimFtpdActionBar.Text" parent="@android:style/TextAppearance">
-		<item name="android:textColor">@android:color/white</item>
-	</style>
-
+	
 	<declare-styleable name="customAttrs">
 		<attr name="iconStart" format="reference" />
 		<attr name="iconStop" format="reference" />
@@ -48,28 +34,16 @@
 		<!-- <item name="nnf_toolbarTheme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item> -->
 	</style>
 
-	<style name="FilePickerAlertDialogTheme" parent="Theme.AppCompat.Dialog.Alert">
+	<style name="FilePickerAlertDialogTheme" parent="Theme.AppCompat.DayNight.Dialog.Alert">
 		<item name="colorPrimary">@color/blueIcon</item>
 		<item name="colorPrimaryDark">@color/blueIconDark</item>
 		<item name="colorAccent">@color/blueIconAccent</item>
 	</style>
 
-	<style name="FilepickerBaseTheme" parent="Theme.AppCompat.DialogWhenLarge">
+	<style name="FilepickerBaseTheme" parent="Theme.AppCompat.DayNight.DialogWhenLarge">
 		<!-- You can override this in your sub theme -->
 		<item name="filepickerToolbarTheme">@style/ThemeOverlay.AppCompat.ActionBar</item>
-		<item name="filepickerSeparatorColor">@color/filepickerDarkSeparatorColor</item>
-		<item name="filepickerSaveIconColor">?attr/colorAccent</item>
-		<item name="filepickerDirIconColor">?attr/colorAccent</item>
-
-		<!-- These are important. Handled by toolbar. -->
-		<item name="windowActionBar">false</item>
-		<item name="windowNoTitle">true</item>
-	</style>
-
-	<style name="FilepickerBaseTheme.Light" parent="Theme.AppCompat.Light.DialogWhenLarge">
-		<!-- You can override this in your sub theme -->
-		<item name="filepickerToolbarTheme">@style/ThemeOverlay.AppCompat.ActionBar</item>
-		<item name="filepickerSeparatorColor">@color/filepickerLightSeparatorColor</item>
+		<item name="filepickerSeparatorColor">@color/filepickerSeparatorColor</item>
 		<item name="filepickerSaveIconColor">?attr/colorAccent</item>
 		<item name="filepickerDirIconColor">?attr/colorAccent</item>
 

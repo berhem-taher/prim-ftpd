@@ -148,11 +148,11 @@ public class LoadPrefsUtil
 		return ServerToStart.byXmlVal(whichServerStr);
 	}
 
-	public static Theme theme(SharedPreferences prefs) {
+	public static String theme(SharedPreferences prefs) {
 		String themeStr = prefs.getString(
 			PREF_KEY_THEME,
-			Theme.DARK.xmlValue());
-		return Theme.byXmlVal(themeStr);
+			"system");
+			return themeStr;
 	}
 
 	public static void storeLogging(SharedPreferences prefs, Logging value) {

@@ -20,6 +20,8 @@ import org.primftpd.util.NotificationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import androidx.appcompat.app.AppCompatDelegate;
+
 import java.io.File;
 
 public class FtpPrefsFragment extends PreferenceFragment
@@ -103,7 +105,9 @@ public class FtpPrefsFragment extends PreferenceFragment
 		themePref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 			@Override
 			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				getActivity().recreate();
+				int theme = Theme.byString(newValue.toString());
+				AppCompatDelegate.setDefaultNightMode(theme);
+
 				return true;
 			}
 		});
